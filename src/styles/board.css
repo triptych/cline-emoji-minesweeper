@@ -1,0 +1,101 @@
+.game-board {
+    display: grid;
+    gap: 2px;
+    background-color: var(--board-bg);
+    padding: 10px;
+    border-radius: 4px;
+    margin: 20px auto;
+    width: fit-content;
+    user-select: none;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.1s;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.cell:hover {
+    transform: scale(1.05);
+}
+
+.cell.revealed {
+    background-color: transparent;
+}
+
+/* Number colors */
+.cell[data-number="1"] { color: #0000FF; }
+.cell[data-number="2"] { color: #008000; }
+.cell[data-number="3"] { color: #FF0000; }
+.cell[data-number="4"] { color: #000080; }
+.cell[data-number="5"] { color: #800000; }
+.cell[data-number="6"] { color: #008080; }
+.cell[data-number="7"] { color: #000000; }
+.cell[data-number="8"] { color: #808080; }
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .cell {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cell {
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
+    }
+}
+
+/* Game state classes */
+.game-over .cell {
+    pointer-events: none;
+}
+
+.game-won .cell {
+    pointer-events: none;
+}
+
+/* Animation for revealing cells */
+@keyframes reveal {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.cell.revealed {
+    animation: reveal 0.2s ease-out;
+}
+
+/* Animation for game over */
+@keyframes explode {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cell.exploded {
+    animation: explode 0.5s ease-out;
+}
